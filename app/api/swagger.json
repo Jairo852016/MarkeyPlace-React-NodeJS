@@ -1,8 +1,8 @@
 {
     "openapi": "3.0.3",
     "info": {
-      "title": "Red Social de nodeJS",
-      "description": "una red social en NodeJS",
+      "title": "Market Place de nodeJS",
+      "description": "Market Place   en NodeJS",
       "contact": {
         "email": "jairo85cd@gmail.com"
       },
@@ -50,6 +50,66 @@
               }
             }
           }
+        },
+        "put": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Actualiza un usuario",
+          "description": "Actualiza un usuario en nuestra app.",
+          "operationId": "upser",
+          "requestBody": {
+            "description": "Actualiza un objeto usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Listar todos usuario",
+          "description": "Listar todos usuario en nuestra app.",
+          "operationId": "listUser",
+          "requestBody": {
+            "description": "Listar todoslos objetos usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
         }
       },
       "/user/{username}": {
@@ -57,14 +117,14 @@
           "tags": [
             "user"
           ],
-          "summary": "Lista de usuarios",
-          "description": "lista los usuarios.",
+          "summary": "Lista de usuarios por id",
+          "description": "ista los objetos usuario filtrados por id ",
           "operationId": "listUser",
           "parameters": [
             {
               "name": "username",
               "in": "path",
-              "description": "The name that needs to be fetched. Use user1 for testing. ",
+              "description": "id por los que se van al filtrar la tabla usuairos",
               "required": true,
               "schema": {
                 "type": "string"
@@ -90,6 +150,130 @@
             }
           }
         }
+      },
+      "/auth": {
+        "post": {
+          "tags": [
+            "auth"
+          ],
+          "summary": "Realiza el proceso de inicio de sesion",
+          "description": "Engresa los datos para el Login.",
+          "operationId": "login",
+          "requestBody": {
+            "description": "Authenticacion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auth"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Auth"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/product": {
+        "post": {
+          "tags": [
+            "product"
+          ],
+          "summary": "crea un producto",
+          "description": "crea un producto en nuestra app.",
+          "operationId": "createProduct",
+          "requestBody": {
+            "description": "crea un objeto producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "product"
+          ],
+          "summary": "Actualiza un producto",
+          "description": "Actualiza un producto en nuestra app.",
+          "operationId": "upser",
+          "requestBody": {
+            "description": "Actualiza un objeto producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "product"
+          ],
+          "summary": "Listar todos producto",
+          "description": "Listar todos productos en nuestra app.",
+          "operationId": "listProduct",
+          "requestBody": {
+            "description": "Listar todos los objetos productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "components": {
@@ -103,11 +287,57 @@
             },
             "username": {
               "type": "string",
-              "example": "theUser"
+              "example": "jairo85cd@gmail.com"
+            },
+            "name": {
+              "type": "string",
+              "example": "Jairo"
+            },
+            "tipo": {
+              "type": "string",
+              "example": "Admin"
+            }
+          }
+        },
+        "Auth": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "username": {
+              "type": "string",
+              "example": "jairo85cd@gmail.com"
             },
             "password": {
               "type": "string",
-              "example": "12345"
+              "example": "Jairo"
+            }
+          }
+        },
+        "Product": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "user": {
+              "type": "string",
+              "example": "12sdf"
+            },
+            "nombre": {
+              "type": "string",
+              "example": "Jairo"
+            },
+            "cantidada": {
+              "type": "integer",
+              "example": "3"
+            },
+            "precio": {
+              "type": "float",
+              "example": "22,5"
             }
           }
         }
