@@ -1,0 +1,116 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Red Social de nodeJS",
+      "description": "una red social en NodeJS",
+      "contact": {
+        "email": "jairo85cd@gmail.com"
+      },
+      "version": "1.0.11"
+    },
+    "servers": [
+      {
+        "url": "localhost:3000"
+      }
+    ],
+    "tags": [
+      {
+        "name": "user",
+        "description": "Operaciones sobre el usuario"
+      }
+    ],
+    "paths": {
+      "/user": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "crea un usuario",
+          "description": "crea un usuario en nuestra app.",
+          "operationId": "createUser",
+          "requestBody": {
+            "description": "crea un objeto usuario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "default": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/user/{username}": {
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Lista de usuarios",
+          "description": "lista los usuarios.",
+          "operationId": "listUser",
+          "parameters": [
+            {
+              "name": "username",
+              "in": "path",
+              "description": "The name that needs to be fetched. Use user1 for testing. ",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid username supplied"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "1"
+            },
+            "username": {
+              "type": "string",
+              "example": "theUser"
+            },
+            "password": {
+              "type": "string",
+              "example": "12345"
+            }
+          }
+        }
+      }
+    }
+  }
