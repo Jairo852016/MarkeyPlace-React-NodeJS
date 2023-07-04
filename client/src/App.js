@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 
 
 Modal.setAppElement('#root');
 
 
 function Home() {
-  return <h1>Home</h1>;
+  return <h1>H</h1>;
 }
 
 function Dashboard() {
@@ -52,11 +52,12 @@ function AdminPanel() {
   );
 }
 
-function Menu({ tipo }) {
+function Menu({ tipo , isLoggedIn }) {
 
-  const isLoggedIn = useSelector((state) => state.isLoggedIn); // Obtener el estado de isLoggedIn desde el store (usando Redux)
-
-  if (!isLoggedIn) {
+  //const isLoggedIn3 = useSelector((state) => state.isLoggedIn); // Obtener el estado de isLoggedIn desde el store (usando Redux)
+ console.log('Menu ',tipo);
+  if (tipo!=='') {
+    console.log('null');
     return null; // No mostrar el menú si el usuario no ha iniciado sesión
   }
   return (
@@ -119,8 +120,16 @@ function App() {
     setRegisterModalOpen(true);
   };
 
+  
   const handleRegisterModalClose = () => {
     setRegisterModalOpen(false);
+  };
+
+  const handleIsLoggedIn = () => {
+    setIsLoggedIn(true);
+  };
+  const handleIsLoggedInClose = () => {
+    setIsLoggedIn(false);
   };
 
   const handleRegisterUsernameChange = (e) => {
@@ -180,19 +189,23 @@ function App() {
           // Guardar el token en el estado
           setToken(token);
           setTipo(tipo);
-          setIsLoggedIn(true); // Establecer la variable isLoggedIn en true
-          // Navegar a la nueva pantalla
-          //history.push('/producto');
-          return <Navigate to="/producto" />;
-          //history.push('/nueva-pantalla');
+          // Actualizar el estado de isLoggedIn a true
+          //setIsLoggedIn(true);
+          handleIsLoggedIn();
+         
+          console.log('islogged', isLoggedIn);
+          alert('login Exitoso',isLoggedIn);
+   
         } else {
           // Mostrar un mensaje de error o realizar alguna acción en caso de fallo en el inicio de sesión
           console.log('tiene problemas con el login');
+          alert('Error de Authenticacion');
           
         }
        })
        .catch(error => {
          console.error('Error de registro:', error);
+         alert('Error de Authenticacion');
          // Manejar el error de registro según tu necesidad
        });
        
@@ -300,12 +313,14 @@ function App() {
         </form>
        
       </Modal>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/*" element={<Navigate to="/" />} />
-      </Routes>
+      <Router>
+        <Menu tipo={tipo} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/admin" element={<AdminPanel />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
