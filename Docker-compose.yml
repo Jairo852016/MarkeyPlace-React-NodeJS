@@ -42,7 +42,7 @@ services:
       - db
   frontend:
     build:
-      context: ./client/clientreac
+      context: ./client/
       dockerfile: Dockerfile
     ports:
       - '8000:3000'

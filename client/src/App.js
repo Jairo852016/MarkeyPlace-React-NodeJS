@@ -24,10 +24,32 @@ function Dashboard() {
 }
 
 function AdminPanel() {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    // Realizar la solicitud GET al servidor para obtener todos los productos
+    axios.get('http://localhost:3002/api/product/')
+      .then(response => {
+        console.log(response.data);
+        // Actualizar el estado con los productos obtenidos
+        setProductos(response.data);
+      })
+      .catch(error => {
+        console.error('Error al obtener los productos:', error);
+        // Manejar el error según tu necesidad
+      });
+  }, []);
   return (
     <div>
       <h1>Panel de Administrador</h1>
       <p>Contenido del Panel de Administrador...</p>
+
+      <h2>Listado de Productos</h2>
+      <ul>
+        {productos.map(producto => (
+          <li key={producto.id}>{producto.nombre}</li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -167,6 +189,8 @@ function App() {
           //history.push('/nueva-pantalla');
         } else {
           // Mostrar un mensaje de error o realizar alguna acción en caso de fallo en el inicio de sesión
+          console.log('tiene problemas con el login');
+          
         }
        })
        .catch(error => {
@@ -278,6 +302,12 @@ function App() {
         </form>
        
       </Modal>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/admin" element={<AdminPanel />} />
+        <Route path="/*" element={<Navigate to="/" />} />
+      </Routes>
     </div>
   );
 }
