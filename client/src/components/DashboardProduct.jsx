@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import Header from '../template/Header';
 import { useNavigate } from 'react-router-dom';
-import { apiUrl } from '../services/apirest';
+import { apiUrlP } from '../services/apirest';
 import axios from 'axios';
 
-const Dashboard = () => {
+const DashboardProduct = () => {
   const navigate = useNavigate();
-  const [usuarios, setUsuarios] = React.useState([]);
+  const [productos, setProductos] = React.useState([]);
 
   const clickUser = (id) => {
     navigate(`/editar/${id}`, { replace: true });
@@ -15,8 +15,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(apiUrl + 'user');
-        setUsuarios(response.data.body);
+        const response = await axios.get(apiUrlP + 'product');
+        setProductos(response.data.body);
       } catch (error) {
         console.log(error);
       }
@@ -34,18 +34,20 @@ const Dashboard = () => {
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Nombre</th>
-              <th scope="col">Email</th>
-              <th scope="col">Tipo</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Usuario</th>
             </tr>
           </thead>
           <tbody>
-            {usuarios.map((value, index) => {
+            {productos.map((value, index) => {
               return (
-                <tr key={index} onClick={() => clickUser(value.id)}>
+                <tr key={index} >
                   <td>{value.id}</td>
-                  <td>{value.name}</td>
-                  <td>{value.username}</td>
-                  <td>{value.tipo}</td>
+                  <td>{value.nombre}</td>
+                  <td>{value.cantidad}</td>
+                  <td>{value.precio}</td>
+                  <td>{value.user}</td>
                 </tr>
               );
             })}
@@ -56,4 +58,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardProduct;
