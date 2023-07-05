@@ -51,6 +51,22 @@ services:
     environment:
       - NODE_ENV=production
     command: npm start
+  reverse-proxy:
+    build:
+      context: ./reverse-proxy
+    container_name: reverse-proxy
+    depends_on:
+      - app
+      - product
+      - frontend
+    ports:
+      - 8080:80
+    restart: always
+    volumes:
+      - static:/usr/src/app/static
+volumes:
+ 
+  static:
     
     
      

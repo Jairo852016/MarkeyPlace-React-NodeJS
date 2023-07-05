@@ -24,7 +24,7 @@ module.exports= function(injectedStore){
                     };
                     return resp;
                 }else{
-                    throw new Error('Informacion Invalida');
+                    throw new Error('Informacion Invalida'  );
                 }
             })
       
