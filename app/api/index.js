@@ -12,7 +12,15 @@ const auth=require('./components/auth/network');
 const errors=require('../network/errors');
 
 const app=express();
-app.use(cors()) // Use this after the variable declaration
+
+
+
+const corsOptions ={
+    origin:'http://159.223.98.208:8080', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
 // Middleware para configurar los encabezados CORS
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://159.223.98.208:8080');
