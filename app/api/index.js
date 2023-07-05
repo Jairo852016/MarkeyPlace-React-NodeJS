@@ -15,18 +15,12 @@ const app=express();
 
 
 
-const corsOptions ={
-    origin:'http://159.223.98.208:8080', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
-app.use(cors(corsOptions));
 // Middleware para configurar los encabezados CORS
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://159.223.98.208:8080');
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://159.223.98.208:8080/');
+  //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 
