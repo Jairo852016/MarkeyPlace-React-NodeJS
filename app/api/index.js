@@ -13,7 +13,9 @@ const errors=require('../network/errors');
 
 const app=express();
 
-
+app.use(cors({
+  origin: 'http://159.223.98.208:8080'
+}));
 
 // Middleware para configurar los encabezados CORS
 app.use((req, res, next) => {
