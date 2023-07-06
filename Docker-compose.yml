@@ -15,6 +15,7 @@ services:
       - "3306:3306"
 
   app:
+    container_name: app
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -24,9 +25,11 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASS=Vale2016
     ports:
-      - "3000:3000"
+      - "80:3000"
     depends_on:
       - db
+    networks:
+      - mi-red-docker
   product:
     build:
       context: ./app-Producto
@@ -40,6 +43,8 @@ services:
       - "3002:3002"
     depends_on:
       - db
+    
+
   frontend:
     build:
       context: ./client/
@@ -51,6 +56,8 @@ services:
     environment:
       - NODE_ENV=production
     command: npm start
+    networks:
+      - mi-red-docker
   reverse-proxy:
     build:
       context: ./reverse-proxy
@@ -65,8 +72,9 @@ services:
     volumes:
       - static:/usr/src/app/static
 volumes:
- 
   static:
+networks:
+  mi-red-docker:
     
     
      
