@@ -51,6 +51,7 @@ services:
       - mi-red-docker
 
   frontend:
+    container_name: frontend
     build:
       context: ./client/
       dockerfile: Dockerfile
@@ -64,13 +65,12 @@ services:
     networks:
       - mi-red-docker
   reverse-proxy:
+    
     build:
       context: ./reverse-proxy
     container_name: reverse-proxy
     depends_on:
-      - app
-      - product
-      - frontend
+       - frontend
     ports:
       - 8080:80
     restart: always
