@@ -7,7 +7,14 @@ const product=require('./components/network');
 const errors=require('../network/errors');
 
 const app=express();
-
+// Middleware para configurar los encabezados CORS
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
 app.use(bodyParser.json());
 
 

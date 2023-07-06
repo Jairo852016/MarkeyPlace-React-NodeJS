@@ -17,7 +17,7 @@ const app=express();
 
 // Middleware para configurar los encabezados CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://159.223.98.208:8080/');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
