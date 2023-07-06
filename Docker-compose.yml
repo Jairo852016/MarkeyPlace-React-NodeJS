@@ -27,7 +27,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASS=Vale2016
     ports:
-      - "3000:3000"
+      - "80:3000"
     depends_on:
       - db
     networks:
@@ -45,9 +45,9 @@ services:
       - "3002:3002"
     depends_on:
       - db
+
     networks:
       - mi-red-docker
-    
 
   frontend:
     build:
