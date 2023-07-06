@@ -14,6 +14,7 @@ router.post('/:id', upsert);
 
 // functions
 function list(req, res, next) {
+    console.log('Aqui');
     Controller.list()
         .then(data => {
             response.success(req, res, data, 200);
