@@ -33,6 +33,7 @@ services:
     networks:
       - mi-red-docker
   product:
+    container_name: product
     build:
       context: ./app-Producto
       dockerfile: Dockerfile
