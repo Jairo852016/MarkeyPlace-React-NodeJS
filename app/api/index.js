@@ -14,17 +14,10 @@ const errors=require('../network/errors');
 const app=express();
 
 app.use(cors({
-  origin: 'http://159.223.98.208:8080'
+  origin: 'http://159.223.98.208:8080',
+  methods: 'GET, POST, PUT, DELETE',
+  allowedHeaders: 'Content-Type, Authorization'
 }));
-
-// Middleware para configurar los encabezados CORS
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  //res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
 
 
 app.use(bodyParser.json());
