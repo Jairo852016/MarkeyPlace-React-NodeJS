@@ -13,8 +13,11 @@ services:
       - ./db/script.sql:/docker-entrypoint-initdb.d/script.sql
     ports:
       - "3306:3306"
+    networks:
+      - mi-red-docker
 
   app:
+    container_name: app
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -27,6 +30,8 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    networks:
+      - mi-red-docker
   product:
     build:
       context: ./app-Producto
@@ -40,6 +45,10 @@ services:
       - "3002:3002"
     depends_on:
       - db
+    networks:
+      - mi-red-docker
+    
+
   frontend:
     build:
       context: ./client/
@@ -51,6 +60,8 @@ services:
     environment:
       - NODE_ENV=production
     command: npm start
+    networks:
+      - mi-red-docker
   reverse-proxy:
     build:
       context: ./reverse-proxy
@@ -64,9 +75,12 @@ services:
     restart: always
     volumes:
       - static:/usr/src/app/static
+    networks:
+      - mi-red-docker
 volumes:
- 
   static:
+networks:
+  mi-red-docker:
     
     
      
