@@ -1,4 +1,5 @@
 const express=require('express');
+const cors = require('cors')
 const bodyParser = require('body-parser');
 
 const config= require('../config.js');
@@ -7,15 +8,8 @@ const product=require('./components/network');
 const errors=require('../network/errors');
 
 const app=express();
+app.use(cors());
 
-// Middleware para configurar los encabezados CORS
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-  });
-app.use(bodyParser.json());
 
 
 
